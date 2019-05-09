@@ -1,0 +1,21 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> ll = new ArrayList<List<Integer>>();
+        List<Integer> l  = new ArrayList<Integer>();
+        per(ll, l, nums ,new int[nums.length]);
+        return ll;
+    }
+    
+    public void per(List<List<Integer>> ll, List<Integer> l, int[] arr, int[] use){
+        if(l.size()==arr.length)
+            ll.add(new ArrayList<Integer>(l));
+        for(int i=0; i<arr.length; i++){
+            if(use[i] == 1) continue;
+            l.add(arr[i]);
+            use[i] = 1;
+            per(ll, l, arr, use);
+            l.remove(l.size()-1);
+            use[i] = 0;
+        }
+    }
+}
